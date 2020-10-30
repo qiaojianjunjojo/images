@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background-color: rgb(164, 204, 21);
+        }
+        .taichi{
+            display:flex ;
+            /* flex-direction: row; */
+            align-items: center;
+            width: 400px;
+            height: 400px;
+            /* background-color:red; */
+            background:linear-gradient(#000 50%,#fff 50%);
+            border-radius: 50%;
+            margin: 0;
+            padding: 0;
+            animation: rotate2 6s infinite linear ;
+        }
+        .taichi::before,.taichi:after{
+            content: "";
+            display: block;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+        }
+        .taichi::before{
+            background-color: #000;
+            border: 75px solid #fff;
+            /* animation: change 2s infinite linear alternate; */
+            /* transform-origin: 0% 50%; */
+            /* animation-delay: -2s; */
+            
+        }
+        .taichi:after{
+            background-color: #fff;
+            border: 75px solid #000;
+            /* animation: change 2s infinite linear alternate; */
+            /* transform-origin: 100% 50%; */
+            /* animation-delay: 2s; */
+        }
+        @keyframes change{
+            from{
+                transform: scale(0.5);
+            }
+            to{
+                transform: scale(1.5);
+            }
+        }
+        @keyframes rotate2{
+            form{
+                transform: rotate(0deg);
+                opacity: 0.1;
+            }
+            to{
+                transform: rotate(360deg);
+                opacity: 0.9;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="taichi">
+        <!-- <div class="topc"></div>
+        <div class="bottomc"></div> -->
+    </div>
+</body>
+</html>

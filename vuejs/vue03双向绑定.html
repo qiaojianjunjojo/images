@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="container">
+        <p>{{message|toUpper}}</p>
+        <input type="text" v-model = 'message'>
+        <button v-on:click = "reversemessage">翻转</button>
+    </div>
+    <script>
+        // v-model 指令用来在 input、select、textarea、checkbox、radio 等表单控件元素上创建双向数据绑定，根据表单上的值，自动更新绑定的元素的值。
+
+        // 按钮的事件我们可以使用 v-on 监听事件，并对用户的输入进行响应。
+        // Vue.js 允许你自定义过滤器，被用作一些常见的文本格式化。由"管道符"指示, 格式如下：
+
+        var app = new Vue({
+            el:'#container',
+            data:{
+                message:'hello world1'
+            },
+            methods:{
+                reversemessage:function(){
+                    //注意在 reverseMessage 方法中，我们更新了应用的状态，但没有触碰 DOM——所有的 DOM 操作都由 Vue 来处理，你编写的代码只需要关注逻辑层面即可。
+                    this.message = this.message.split('').reverse().join('');
+                }
+            },
+            filters:{
+                toUpper:function(value){
+                    if(!value) return ''
+                    return value.toLowerCase();
+                }
+            }
+        });
+    </script>
+</body>
+</html>

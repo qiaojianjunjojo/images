@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+    <style>
+        table{
+            border-collapse: collapse;
+            width: 100%;
+            height: 200px;
+            text-align: center;
+        }
+        th,td{
+            border: 1px solid black;
+        }
+        span{
+            font-size: 25px;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        <table>
+            <tr>
+                <th>序号</th>
+                <th>商品名称</th>
+                <th>商品价格</th>
+                <th>购买数量</th>
+                <th>操作</th>
+            </tr>
+            <tr v-for = "iphone in Ip_Json">
+                <td>{{iphone.id}}</td>
+                <td>{{iphone.name}}</td>
+                <td>{{iphone.price}}</td>
+                <td>
+                    <button v-on:click = "iphone.count--" v-bind:disabled="iphone.count===0">-</button>
+                    {{iphone.count}}
+                    <button @click = "iphone.count++">+</button>
+                </td>
+                <td>
+                    <button @click = "iphone.count=0">删除</button>
+                </td>
+            </tr>
+        </table>
+        <span>总金额：{{totalprice()}}</span>
+    </div>
+    <div class="app2">
+        省份：
+        <select v-model = "province">
+            <option selected="selected">请选择</option>
+            <option v-bind:value="p" v-for = "p in provinces">{{p}}</option>
+        </select>
+        城市：
+        <select v-model = 'city'>
+            <option selected="selected">请选择</option>
+            <option v-bind:value="c" v-for = "c in cityList">{{c}}</option>
+        </select>
+    </div>
+    <script>
+        var app = new Vue({
+            el:".app",
+            data:{
+                Ip_Json: [
+                    {
+                    id: 1,
+                    name: 'iphone 8',
+                    price: 5099,
+                    count: 1
+                    },
+                    {
+                            id: 2,
+                            name: 'iphone xs',
+                            price: 8699,
+                            count: 1
+                        },
+                    {
+                        id: 3,
+                        name: 'iphone xr',
+                        price: 6499,
+                        count: 1
+                    }]
+            },
+            methods:{
+                totalprice:function(){
+                    //ReferenceError: Ip_Json is not defined
+                    //for(var i=0;i<=this.Ip_Json.length;i++){ 
+                    //应该是写< 不是<= i 是从0开始，到i=3，len=3,Ip_Json[3]值第4个对象，所以报undefined;
+                    var sum = 0
+                    for(var i=0;i<this.Ip_Json.length;i++){
+                        sum = sum +this.Ip_Json[i].count*this.Ip_Json[i].price;
+                    }
+                    return sum;
+                }
+            }
+        });
+
+        var app2 = new Vue({
+            el:".app2",
+            data:{
+                city: '请选择',
+                province: '请选择',
+                provinces: ['广东', '湖南', '湖北', '北京'],
+                cityList: [],
+                area: [{
+                name: '广东',
+                id: 1,
+                child: ['广州', '深圳', '东莞']
+                },
+                {
+                name: '湖南',
+                id: 2,
+                child: ['长沙', '株洲', '湘潭']
+                },
+                {
+                name: '湖北',
+                id: 3,
+                child: ['武汉']
+                },
+                {
+                name: '北京',
+                id: 4,
+                child: ['北京']
+                }]
+            },
+            watch:{
+                province:function(nval, oval){
+                    var self = this;
+                    var cityList = [];
+                    if (nval == '请选择') {
+                        this.citylist = [];
+                    }
+                    if (nval != oval) {
+                        for (var i = 0; i < self.area.length; i++) {
+                        if (self.area[i].name == nval) {
+                            cityList = self.area[i].child;
+                        }
+                        }
+                        this.city = "请选择";
+                        this.cityList = cityList;
+                    }
+                }
+            }
+        })
+    </script>
+</body>
+</html>

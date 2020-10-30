@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 350px;
+            height: 600px;
+            background-color: rgb(89, 136, 14);
+        }
+        .heart{
+            position: absolute;
+            width: 150px;
+            height: 150px;
+            background-color: white;
+            border-radius: 50%;
+            animation: bit 2s infinite ease-in-out alternate;
+        }
+        .heart::before{
+            content: '';
+            position: absolute;
+            width: 80px;
+            left: 19px;
+            height: 120px;
+            top:15px;
+            background-color: violet;
+            border-radius: 80px 80px 0 0;
+            -webkit-transform: rotate(-45deg);
+        }
+        .heart::after{
+            content: '';
+            position: absolute;
+            left:49px;
+            width: 80px;
+            height: 120px;
+            top: 15px;
+            background-color: violet;
+            border-radius: 80px 80px 0 0;
+            -webkit-transform: rotate(45deg);
+            
+        }
+        @keyframes bit{
+            from{
+                -webkit-transform: scale(1);
+                background-color: white;
+            }
+            to{
+                -webkit-transform: scale(1.5);
+                background-color: rgba(236, 9, 9, 0.511);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="heart"></div>
+    </div>
+</body>
+</html>

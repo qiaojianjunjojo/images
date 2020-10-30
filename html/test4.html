@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8"> 
+<title>菜鸟教程(runoob.com)</title> 
+<script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
+</script>
+<script>
+$(function(){
+    $("#name").val($("#p1").text());
+    $("#name").change(function(){
+        $("#p1").text($("#name").val());
+    });
+
+});
+</script>
+</head>
+<body>
+
+<p id="p1">Hello world!</p>
+<input type="text" id="name">
+</body>
+</html>

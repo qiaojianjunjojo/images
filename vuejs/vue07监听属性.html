@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div class="app">
+    <p>计数器：{{counter}}</p>
+    <button @click = "counter++">点我</button>
+    <p v-html = "msg"></p>
+    </div>
+    <div class="app2">
+        <input type="text" v-model = "km">m
+        <input type="text" v-model = "m">km
+    </div>
+    <script>
+        var ap = new Vue({
+            el:".app",
+            data:{
+                counter:1,
+                msg:""
+            },
+            methods:{
+                clickmethod:function(){
+                    this.counter = this.counter+1;
+                } 
+            }
+        });
+        var ap2 = new Vue({
+            el:".app2",
+            data:{
+                km:0,
+                m:0
+            },
+            watch:{
+                km:function(){
+                    this.m = this.km/1000;
+                },
+                m:function(){
+                    this.km = this.m*1000;
+                }
+            }
+        });
+        ap.$watch('counter',function(newnumber,oldnumber){
+            ap.msg = ap.msg + "旧值为：" + oldnumber + ",新值为：" +newnumber + "<br>";
+        });
+        ap2.$watch('km',function(newkm,oldkm){
+            ap.msg = ap.msg + "旧值为：" + oldkm + ",新值为：" +newkm + "<br>";
+        });
+    </script>
+</body>
+</html>

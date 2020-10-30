@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            min-height: 100vh;
+            background-color: rgb(11, 92, 129);
+        }
+        .clock{
+            width: 350px;
+            height: 350px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(38, 146, 17);
+            border: 3px solid rgba(180, 104, 34,.5);
+            box-shadow: 0 0 10px 2px rgb(169, 155, 182);
+            border-radius: 50%;
+            
+        }
+        .clock::before{
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background-color: #fff;
+            z-index: 10000;
+        }
+        .hour,.min,.sec{
+            position: absolute;
+        }
+        .clock .hour, .hr{
+            width: 160px;
+            height: 160px;
+        }
+        .clock .min, .mn{
+            width: 190px;
+            height: 190px;
+        }
+        .clock .sec, .sc{
+            width: 230px;
+            height: 230px;
+        }
+        .hr, .mn, .sc{
+            display: flex;
+            justify-content: center;
+            /* align-items: center; */
+        }
+        .hr::before{
+            content: '';
+            position: absolute;
+            width: 8px;
+            height: 80px;
+            
+            border-radius:  6px 6px  0 0;
+            /* transform: translateY(-50%) rotate(60deg); */
+            transform-origin: bottom;
+            background-color: rgb(15, 10, 10);
+            z-index: 10;
+            /* animation: rotates 216000s infinite linear ; */
+            
+        }
+        .mn::before{
+            content: '';
+            position: absolute;
+            width: 5px;
+            height: 100px;
+            border-radius:  6px 6px  0 0;
+            /* transform: translateY(-50%) rotate(30deg); */
+            transform-origin: bottom;
+            background-color: rgb(15, 10, 10);
+            z-index: 11;
+            /* animation: rotates 3600s infinite linear ; */
+            
+        }
+        .sc::before{
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 120px;
+            border-radius:  6px 6px  0 0;
+            /* transform: translateY(-50%) rotate(230deg); */
+            transform-origin: bottom;
+            background-color: rgb(15, 10, 10);
+            z-index: 12;
+            /* animation: rotates 60s infinite linear ; */
+        }
+        @keyframes rotates{
+            from{
+                transform: rotate(0deg);
+                transform-origin: bottom;
+            }
+            to{
+                transform: rotate(360deg);
+                transform-origin: bottom;
+            }
+        }
+        .clock2{
+            width: 300px;
+            height: 300px;
+            background-color: #fff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            border: 2px solid black;
+            box-shadow: 2px 2px  5px 2px #f0f0f0;
+            border-radius: 50%;
+
+        }
+        .clock2::before{
+            content: '';
+            position: absolute;
+            width: 15px;
+            height: 15px;
+            
+        }
+        span{
+            position: absolute;
+            width: 280px;
+            height: 280px;
+            display: flex;
+            justify-content: center;
+        }
+        span:nth-child(2){
+            transform: rotate(90deg);
+        
+        }
+
+        span:nth-child(3){
+            transform: rotate(180deg);
+        
+        }
+        span:nth-child(4){
+            transform: rotate(270deg);
+        
+        }
+        span:nth-child(1)::before{
+            content: '12';
+            position: absolute;
+            top:5px;
+        }
+        span:nth-child(1)::after{
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 6px;
+            background-color: rgb(49, 17, 17);
+        }
+        span:nth-child(2)::before{
+            content: '3';
+            position: absolute;
+            top:5px;
+            transform: rotate(-90deg);
+        }
+        span:nth-child(2)::after{
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 6px;
+            background-color: rgb(49, 17, 17);
+        }
+        span:nth-child(3)::before{
+            content: '6';
+            position: absolute;
+            top:5px;
+            transform: rotate(-180deg);
+        }
+        span:nth-child(3)::after{
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 6px;
+            background-color: rgb(49, 17, 17);
+        }
+        span:nth-child(4)::before{
+            content: '9';
+            position: absolute;
+            transform: rotate(-270deg);
+            top:5px;
+        }
+        span:nth-child(4)::after{
+            content: '';
+            position: absolute;
+            width: 3px;
+            height: 6px;
+            background-color: rgb(49, 17, 17);
+        }
+        .hour2{
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            justify-content: center;
+        }
+        .hour2::before{
+            content: '';
+            position: absolute;
+            width: 6px;
+            height: 60px;
+            background: #000;
+        }
+        .min2{
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            display: flex;
+            justify-content: center;
+        }
+        .min2::before{
+            content: '';
+            position: absolute;
+            width: 4px;
+            height: 70px;
+            background: #000;
+        }
+        .sec2{
+            position: absolute;
+            width: 160px;
+            height: 160px;
+            display: flex;
+            justify-content: center;
+        }
+        .sec2::before{
+            content: '';
+            position: absolute;
+            width: 2px;
+            height: 80px;
+            background: #000;
+            /* transform: rotate(30deg);
+            transform-origin: center bottom; */
+            animation: rotates 60s infinite linear;
+        }
+    </style>
+
+</head>
+<body>
+    <div class="clock">
+        <div class="hour">
+            <div class="hr" id="hr"></div>
+        </div>
+        <div class="min">
+            <div class="mn" id="mn"></div>
+        </div>
+        <div class="sec">
+            <div class="sc" id="sc"></div>
+        </div>
+
+    </div>
+    <div class="clock2">
+        <span></span>
+        <span></span>
+        <span></span>
+        <span></span>
+        <div class="hour2">
+            <div class="hr2"></div>
+        </div>
+        <div class="min2">
+            <div class="mn2"></div>
+        </div>
+        <div class="sec2">
+            <div class="sc2"></div>
+        </div>
+        
+    </div>
+    <script>
+        setInterval(() => {
+            let day  = new Date();
+        let hh =day.getHours()*30;
+        let mm = day.getMinutes()*deg;
+        let ss = day.getSeconds()*deg;
+        hr.style.transform = `rotateZ(${(hh) + (mm)/12}deg)`;
+        mn.style.transform = `rotateZ(${mm}deg)`;
+        sc.style.transform = `rotateZ(${ss}deg)`;
+        });
+        const deg = 6;
+        const hr = document.querySelector("#hr");
+        const mn = document.querySelector("#mn");
+        const sc = document.querySelector("#sc");
+        
+    </script>
+</body>
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <ul>
+            <li v-for="(site,index) in sites" :key = "index">
+                {{index}}:{{site.site}}
+            </li>
+            <li v-for="(val,key,idx) in sites2" key = "idx">
+                {{idx}}-{{key}}:{{val}}
+            </li>
+            <li v-for = "i in 10">
+                {{i}}
+            </li>
+        </ul>
+        <div v-for = "n in 9">
+            <span v-for = "m in n">
+                |{{m}}*{{n}} = {{m*n}}|
+            </span>
+        </div>
+        <p>有时，我们想要显示一个数组经过过滤或排序后的版本，而不实际变更或重置原始数据。在这种情况下，可以创建一个计算属性，来返回过滤或排序后的数组。</p>
+        <p v-for = "number in evennums">{{number}}</p>
+        <p>在计算属性不适用的情况下 (例如，在嵌套 v-for 循环中) 你可以使用一个方法：</p>
+        <p v-for="li in list">
+            <span v-for ="num in fil(li)">{{num}}</span>
+        </p>
+        <h2>组件上使用v-for</h2>
+        <form v-on:submit.prevent="addNewTodo">
+            <label for="new-todo">Add a todo</label>
+            <input
+              v-model="newTodoText"
+              id="new-todo"
+              placeholder="E.g. Feed the cat"
+            >
+            <button>Add</button>
+          </form>
+          <ul>
+            <li
+              is="todo-item"
+              v-for="(todo, index) in todos"
+              v-bind:key="todo.id"
+              v-bind:title="todo.title"
+              v-on:remove="todos.splice(index, 1)"
+            ></li>
+          </ul>
+    </div>
+    <script>
+        //组件上使用v-for
+        //不自动将 item 注入到组件里的原因是，这会使得组件与 v-for 的运作紧密耦合。明确组件数据的来源能够使组件在其他场合重复使用。
+        Vue.component('todo-item', {
+                template: '\
+                    <li>\
+                    {{ title }}\
+                    <button v-on:click="$emit(\'remove\')">Remove</button>\
+                    </li>\
+                ',
+                props: ['title']
+                })
+        //为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 key attribute：
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                sites:[{site:"nanjing"},//v-for 迭代数组
+                       {site:"shanghai"},
+                       {site:"beijing"}],
+                sites2:{name: '菜鸟教程', //v-for 迭代对象;，在迭代属性输出的之前，v-for会对属性进行升序排序输出：
+                        url: 'http://www.runoob.com',
+                        slogan: '学的不仅是技术，更是梦想！'},
+                numbers:[1,2,3,4,5,6,7],
+                list:[[1,2,3,4],[5,6,7,8]],
+                newTodoText: '',
+                todos: [
+                {
+                    id: 1,
+                    title: 'Do the dishes',
+                },
+                {
+                    id: 2,
+                    title: 'Take out the trash',
+                },
+                {
+                    id: 3,
+                    title: 'Mow the lawn'
+                }
+                ],
+                nextTodoId: 4
+            },
+            computed:{
+                evennums:function(){
+                    return this.numbers.filter(function(number){
+                        return number%2==0;
+                    })
+                }
+            },
+            methods:{
+                fil:function(set){
+                    return set.filter(function(number){
+                        return number%2==0;
+                    })
+                },
+                addNewTodo: function () {
+                        this.todos.push({
+                            id: this.nextTodoId++,
+                            title: this.newTodoText
+                        })
+                        this.newTodoText = ''
+                        }
+  
+            }
+        });
+        
+    </script>
+</body>
+</html>

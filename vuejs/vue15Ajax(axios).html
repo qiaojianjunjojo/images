@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+    <script src="axios.min.js"></script>
+    <style>
+        .vuetesttable{
+            width: 200px;
+            height: 200px;
+            border-collapse: collapse;
+        }
+        .vuetesttable th, .vuetesttable td{
+            border:  1px solid yellowgreen;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div class="app">
+        {{info}}
+        <table class="vuetesttable">
+            <tr v-for="row in info">
+                <td>{{row.GRADE}}</td><td>{{row.red}}</td><td>{{row.green}}</td>
+            </tr>
+        </table>
+        <p>出勤人數:{{mannum}}</p>
+    </div>
+    
+    <script>
+        //采用axios獲取服務器資料；
+        //table的呈現方式由 原先的純js寫法 改爲vue v-for；
+        var vm = new Vue({
+            el:".app",
+            data:{
+                info:[],
+                mannum:0
+            }
+            ,
+            created(){
+                //定時刷新任務放在created 或者mounted都可以
+                this.getData();
+                this.timer =  setInterval(() => {
+                    this.getData();
+                    console.log("come on!")
+                }, 1000*3);
+            }
+            ,
+            mounted () {
+                
+            },
+            methods:{
+                getData(){
+                    axios
+                        .get('http://10.189.127.62:40012/getBeolCt2Detail/')
+                        .then(response => (this.info = response.data.data))
+                        .catch(function (error) { // 请求失败处理
+                            console.log(error);
+                        });
+
+                        axios
+                        .get('http://10.189.127.62:40014/getNewCken/')
+                        .then(response => (this.mannum = response.data.data[0].num))
+                        .catch(function (error) { // 请求失败处理
+                            console.log(error);
+                        });
+                }
+            },
+            beforeDestroy(){
+                alert("byebye!")
+                clearInterval(this.timer)
+            }
+        })
+    </script>
+</body>
+</html>

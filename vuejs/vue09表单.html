@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div class="app">
+        <p>input元素</p>
+        <!-- 添加一个修饰符 lazy ，从而转变为在 change 事件中同步： -->
+        <input v-model = "message" type="text" placeholder="Runoob"><br>
+        <p>消息是：{{message}}</p>
+        <p>textarea 元素：</p>
+        {{message2}}
+        <br>
+        <!-- 如果要自动过滤用户输入的首尾空格，可以添加 trim 修饰符到 v-model 上过滤输入： -->
+        <textarea v-model.trim.number = "message2"></textarea>
+        <h2>复选框
+            复选框如果是一个为逻辑值，如果是多个则绑定到同一个数组：</h2>
+        <div class="app2">
+            <p>单个复选框：</p>
+            <input type="checkbox" id="checkbox" v-model="checked" >
+            <label for="checkbox">{{ checked }}</label>
+            <p>多个复选框：</p>
+            <input type="checkbox" id="1" value="11" v-model="checkgroup2">
+            <label for="1">1</label>
+            <input type="checkbox" id="2" value="22" v-model="checkgroup2">
+            <label for="2">2</label>
+            <input type="checkbox" id="3" value="33" v-model="checkgroup2">
+            <label for="3">3</label>
+            <input type="checkbox" id="all" value="all" v-model="checkgroupall">
+            <label for="all">ALL</label>
+            {{checkgroup2}}
+            
+        </div>
+        <div>
+            <h2>单选按钮</h2>
+            <input type="radio" id = "周一" value = '周一' v-model = "pick" >
+            <label for="周一">周一</label> 
+            <input type="radio" id = "周二" value = '周二' v-model = "pick">
+            <label for="周二">周二</label> 
+            <input type="radio" id = "周三" value = '周三' v-model = "pick" >
+            <label for="周三">周三</label> 
+            <input type="radio" id = "周四" value = '周四' v-model = "pick">
+            <label for="周四">周四</label> 
+            <p>你选择了：{{pick}}</p>
+        </div>
+        <div>
+            <h2>下拉选单</h2>
+            <select v-model="selected" multiple>
+                <option disabled value="">-请选择-</option>
+                <option value = "今天取吃大餐">吃饭</option>
+                <option value = "shit">喝西北风</option>
+
+            </select>
+            <p >你选择了：{{selected}}</p>
+        </div>
+        <div>
+        <button @click = "submit">提交</button>
+        </div>
+    
+    </div>
+    <script>
+       var vm =  new Vue({
+            el:'.app',
+            data:{
+                message:'Runoob',
+                message2:'菜鸟教程\r\nhttp://www.runoob.com',
+                checked:true,
+                checkgroup2:[],
+                pick:'周一', //vue.js中 更新pick的值是根据input标签中的value属性。
+                selected:'',
+                checkgroupall:null
+            },
+            watch:{
+                checkgroupall:function(){
+                    if(this.checkgroupall){
+                        this.checkgroup2 = ['1','2','3']
+                    }
+                    else{
+                        this.checkgroup2 = []
+                    }
+                }
+            }
+            ,methods:{
+                submit:function(){
+                    var obj = {
+                        ms11:this.message,
+                        ms22:this.message2,
+                        ms33:this.checked,
+                        ms4:this.pick,
+                        ms5:this.selected,
+                        ms6:this.checkgroup2
+                    }
+                    console.log(obj.ms11,obj.ms22)
+                }
+            }
+        });
+    </script>
+</body>
+</html>

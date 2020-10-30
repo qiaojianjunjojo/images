@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+    <p v-if="type == 'A'">
+        I'm A;
+    </p>
+    <p v-else-if="type =='B'">
+        I'm B;
+    </p>
+    <p v-else-if="type =='C'">
+        I'm C;
+    </p>
+    <p v-else>
+        I do not know!;
+    </p>
+    <input type="text" v-model="type">
+    </div>
+    <div id="app2">
+        <p v-if = "seen">Now u see me!</p>
+        <p v-show = "seen">show me!</p>
+        <template v-if="ok">
+            <h1>Title</h1>
+            <p>Paragraph 1</p>
+            <p>Paragraph 2</p>
+          </template>
+          <template v-if="loginType === 'username'">
+            <label>Username</label>
+            <input placeholder="Enter your username" key="username-input">
+          </template>
+          <template v-else>
+            <label>Email</label>
+            <input placeholder="Enter your email address" key="email-input">
+          </template>
+          <button v-on:click = "togglefunc">toggle</button>
+    </div>
+    <script>
+        //指令的职责是，当表达式的值改变时，将其产生的连带影响，响应式地作用于 DOM。指令 attribute 的值预期是单个 JavaScript 表达式
+        var vm = new Vue({
+            el:"#app",
+            data:{
+                type:"A"
+            }
+        });
+
+        var vm2 = new Vue({
+            el:"#app2",
+            data:{
+                seen :false,
+                ok:true,
+                loginType:''
+            },
+            methods:{
+                togglefunc:function(){//添加一个具有唯一值的 key attribute 即可
+                    if(this.loginType==="username"){
+                        this.loginType=""
+                    }
+                    else{
+                        this.loginType ="username";
+                    }
+                }
+            }
+        });
+        //一般来说，v-if 有更高的切换开销，而 v-show 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 v-show 较好
+        //如果在运行时条件很少改变，则使用 v-if 较好。
+    </script>
+</body>
+</html>

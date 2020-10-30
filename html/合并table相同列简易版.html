@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Duplicate Cell Merge</title>
+    <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.6.1.js" 
+             type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            //模擬顯示資料
+            var data =
+            [
+                { No: "1", Name: "Jeffrey", Date: "2011/05/07", Score: 2011 },
+                { No: "1", Name: "Jeffrey", Date: "2011/06/21", Score: 9999 },
+                { No: "1", Name: "Jeffrey", Date: "2011/06/22", Score: 32767 },
+                { No: "2", Name: "Mulder", Date: "2011/06/01", Score: 999 },
+                { No: "3", Name: "Darkthread", Date: "2011/06/10", Score: 100 },
+                { No: "3", Name: "Darkthread", Date: "2011/06/15", Score: 100 }
+            ];
+            var h = [];
+            for (var i = 0; i < data.length; i++) {
+                h.push("<tr>");
+                var obj = data[i];
+                for (var p in obj)
+                    h.push("<td class='c-" + p + "'>" + obj[p] + "</td>");
+                h.push("</tr>");
+            }
+            $("#scoreboard tbody").html(h.join('\n'));
+
+            function uniteTdCells(tableId,colum) {
+                    var table = document.getElementById(tableId);
+                    for (let i = 0; i < table.rows.length; i++) {
+                        for (let c = 0; c < table.rows[i].cells.length; c++) {
+                        if (c<colum) { //选择要合并的列序数，去掉默认全部合并
+                            for (let j = i + 1; j < table.rows.length; j++) {
+                            let cell1 = table.rows[i].cells[c].innerHTML;
+                            let cell2 = table.rows[j].cells[c].innerHTML;
+                            if (cell1 == cell2) { 
+                                table.rows[j].cells[c].style.display = 'none';
+                                table.rows[j].cells[c].style.verticalAlign = 'middle';
+                                table.rows[i].cells[c].rowSpan++;
+                            } else {
+                                table.rows[j].cells[c].style.verticalAlign = 'middle'; 
+                                break;
+                            };
+                            }
+                        }
+                        }
+                    }
+            }
+            uniteTdCells("scoreboard",1);
+            //合併內容相同欄位的邏輯
+            $("#btnShowMe").click(function () {
+                var $lastCell = null;
+                var mergeCellSelector = ".c-No,.c-Name";
+                $("#scoreboard tbody td.c-No").each(function () {
+                    //跟上列的td.c-No比較，是否相同
+                    if ($lastCell && $lastCell.text() == $(this).text()) {
+                        //取得上一列，將要合併欄位的rowspan + 1
+                        $lastCell.closest("tr").children(mergeCellSelector)
+                        .each(function () {
+                            this.rowSpan = (this.rowSpan || 1) + 1;
+                        });
+                        //將本列被合併的欄位移除
+                        $(this).closest("tr").children(mergeCellSelector).remove();
+                    }
+                    else //若未發生合併，以目前的欄位作為上一欄位
+                        $lastCell = $(this);
+                });
+            });
+        });
+    </script>
+    <style type="text/css">
+        #scoreboard { width: 400px; margin-top: 20px; }
+        #scoreboard td { border: 1px solid gray; padding: 4px; }
+        #scoreboard thead { text-align: center; background-color: #ddd; }
+        #scoreboard tbody { text-align: center; }
+        td.c-Score { text-align: right; }
+    </style>
+</head>
+<body>
+<input type="button" id="btnShowMe" value="Show Me the Trick!" />
+<table id="scoreboard">
+    <thead>
+        <tr><td>No</td><td>Name</td><td>Date</td><td>Score</td></tr>
+    </thead>
+    <tbody>
+    </tbody>
+</table>
+ 
+</body>
+</html>

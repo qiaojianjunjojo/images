@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text" v-model = 'msg'>
+        <runnob v-bind:message = 'msg'></runnob>
+        <ol>
+            <qjj-li v-for="site in sites" v-bind:message='site'></qjj-li>
+        </ol>
+        <btgroup v-on:click1='fatherclick'></btgroup>
+        <btgroup v-on:click1='fatherclick'></btgroup>
+        <p>{{total}}</p>
+    </div>
+    <!-- <qjj>外部使用无效</qjj> -->
+    <script>
+Vue.component('btgroup', {
+  template: '<div><button v-on:click="incrementHandler(1)">-</button>{{ counter }}<button v-on:click="incrementHandler(2)">+</button></div>',
+  data: function () {
+    return {//data 必须是一个函数,这样的好处就是每个实例可以维护一份被返回对象的独立的拷贝，如果 data 是一个对象则会影响到其他实例;
+      counter: 0
+    }
+  },
+  methods: {
+    incrementHandler: function (v) {
+        if(v==1){
+            this.counter -= 1;
+            this.$emit('click1',1);
+        }else{ 
+            this.counter += 1;
+            this.$emit('click1',2);
+        }
+      
+    }
+  },
+})
+        //注册
+        Vue.component('runnob',{
+            // 声明 props,父组件的数据需要通过 props 把数据传给子组件，子组件需要显式地用 props 选项声明 "prop"：
+            props:['message'],
+            template:'<h1>{{message}}</h1>'
+        });
+        Vue.component('qjj-li',{
+            // 声明 props,父组件的数据需要通过 props 把数据传给子组件，子组件需要显式地用 props 选项声明 "prop"：
+            props:['message'],
+            template:'<li>{{message.text}}</li>'
+        });
+        var mytest = {template:'<h2>我是局部组件</h2>'}
+        new Vue({
+            el:'#app',
+            data:{
+                msg:'父组件内容1',
+                total:0,
+                sites: [
+                    { text: 'Runoob1' },
+                    { text: 'Google' },
+                    { text: 'Taobao' }]
+            },
+            methods:{
+                fatherclick:function(d){
+                    if(d==1){
+                        this.total-=1
+                    }
+                    else{
+                        this.total+=1
+                    }
+                }
+            }
+            
+        })
+    </script>
+</body>
+</html>

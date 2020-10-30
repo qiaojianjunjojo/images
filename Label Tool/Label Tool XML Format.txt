@@ -1,0 +1,26 @@
+<annotation>
+	<folder>Desktop</folder>
+	<filename>test.png</filename>
+	<path>C:/Users/rh.syu/Desktop/test.png</path>
+	<source>
+		<database>Unknown</database>
+	</source>
+	<size>
+		<width>746</width>
+		<height>644</height>
+		<depth>3</depth>
+	</size>
+	<segmented>0</segmented>
+	<object>
+		<name>defect04</name>
+		<pose>Unspecified</pose>
+		<truncated>0</truncated>
+		<difficult>0</difficult>
+		<bndbox>
+			<xmin>324</xmin>
+			<ymin>143</ymin>
+			<xmax>581</xmax>
+			<ymax>345</ymax>
+		</bndbox>
+	</object>
+</annotation>

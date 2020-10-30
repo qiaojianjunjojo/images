@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <p>Vue混入,查看console控制台輸出。</p>
+    <p>同名钩子函数将合并为一个数组，因此都将被调用。另外，混入对象的钩子将在组件自身钩子之前调用。</p>
+    <p>值为对象的选项，例如 methods、components 和 directives，将被合并为同一个对象。两个对象键名冲突时，取组件对象的键值对。</p>
+    <div class="app"></div>
+    <script>
+        //// 定义一个混入对象
+        var mixin = {
+            created:function(){
+                this.hello()
+            },
+            methods:{
+                hello:function(){
+                    console.log("混入对象的钩子被调用!")
+                }
+            },
+            data:function(){
+                return{
+                    message:'hello',
+                    foo:'abc'
+                }
+            }
+        }
+        // 定义一个使用混入对象的组件
+        var vm = new Vue({
+            el:".app",
+            mixins:[mixin],
+            data:function(){
+                return{
+                    message:'goodbye',
+                    bar:'123'
+                }
+            },
+            created:function(){
+                console.log('组件钩子被调用')
+                console.log(this.$data)
+            }
+        })
+    </script>
+</body>
+</html>

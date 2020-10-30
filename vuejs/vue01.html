@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+
+</head>
+<body>
+    <div id="vue_det">
+        <h1>site : {{site}}</h1>
+        <h1>url : {{url}}</h1>
+        <!-- <h1>{{details()}}</h1> -->
+    </div>
+    <script type="text/javascript">
+    // 可以看到在 Vue 构造器中有一个el 参数，它是 DOM 元素中的 id。在上面实例中 id 为 vue_det，在 div 元素中：
+    // {{ }} 用于输出对象属性和函数返回值。
+    // 当一个 Vue 实例被创建时，它向 Vue 的响应式系统中加入了其 data 对象中能找到的所有的属性。当这些属性的值发生改变时，html 视图将也会产生相应的变化。
+        var vm = new Vue({
+            el:'#vue_det',
+            data:{
+                site:'runnoob1',
+                url:'baidu.com2'
+                
+            },
+            beforeCreate:function(){//实例初始化之后，数据观测 (data observer) 和 event/watcher 事件配置之前被调用。
+                console.log("beforeCreated");
+            },
+            created:function(){
+                //在实例创建完成后被立即调用。在这一步，实例已完成以下的配置：数据观测 (data observer)，property 和方法的运算，
+                //watch/event 事件回调。然而，挂载阶段还没开始，$el property 目前尚不可用。
+                console.log("created");
+            },
+            beforeMount:function(){
+                //在挂载开始之前被调用：相关的 render 函数首次被调用。
+                console.log("beforeMount")
+            },
+            mounted:function(){
+                //实例被挂载后调用，这时 el 被新创建的 vm.$el 替换了。如果根实例挂载到了一个文档内的元素上，当 mounted 被调用时 vm.$el 也在文档内。
+                console.log("mounted")
+            },
+            beforeUpdate:function(){
+                //数据更新时调用，发生在虚拟 DOM 打补丁之前。
+                //。这里适合在更新之前访问现有的 DOM，比如手动移除已添加的事件监听器。
+                console.log("beforeUpdate")
+            },
+            updated:function(){
+                //由于数据更改导致的虚拟 DOM 重新渲染和打补丁，在这之后会调用该钩子
+                console.log("updated!")
+            },
+            beforedestroy:function(){
+                //暂时还不清楚怎么销毁一个vm实例，关闭页面？
+            },
+            destroyed:function(){
+
+            }
+        })
+
+        setTimeout(function(){
+            vm.site = 'www.baidu.com'
+        },3000)
+    </script>
+</body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="jquery.js"></script>
+    <style>
+        body{
+            background-color: yellowgreen;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            width: 100%;
+        }
+        .container{
+            height: 200px;
+            width: 70px;
+            border-radius: 50px;
+            background-color: rgb(107, 80, 80);
+            display: flex;
+            align-items: center;
+            justify-content: space-around;
+            flex-direction: column;
+            padding: 15px 0;
+        }
+        .circle{
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: rgba(148, 138, 151,0.3);
+            position: relative;
+        }
+        .circle::after{
+            content: "";
+            width: 30px;
+            height: 30px;
+            top: 5px;
+            position: absolute;
+            border-radius: 50%;
+            /* background-color: tomato; */
+            border-right: 4px solid rgb(226, 220, 220);
+        }
+        .circle.red{
+            background-color: tomato;
+            box-shadow:  0 0 20px 5px tomato;
+        }
+        .circle.yellow{
+            background-color: yellow;
+            box-shadow:  0 0 20px 5px yellow;
+        }
+        .circle.green{
+            background-color: green;
+            box-shadow:0 0 20px 5px green ;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="circle" color="red"></div>
+        <div class="circle" color = "yellow"></div>
+        <div class="circle" color = "green"></div>
+    </div>
+    <script>
+        const circles = $(".circle");
+        let active = 0;
+
+        setInterval(() => {
+            circles[active].className = 'circle';//每次進入循環要加入這句 ，不然燈會一個個點亮 效果不再變化；
+            active++;
+            if(active>2){
+                active=0;
+            }
+            const cur = circles[active];
+            const color = cur.getAttribute("color");
+            cur.classList.add(color);
+            
+        }, 2000);
+
+    </script>
+</body>
+</html>

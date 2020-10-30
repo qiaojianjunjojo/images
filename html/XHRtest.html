@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head> 
+<meta charset="utf-8"> 
+<title>原生xmlHttprequest</title> 
+</head>
+<body>
+​
+<p><strong>以下内容是通过异步请求获取的：</strong></p>
+<p id="demo"></p>
+<script>
+var xhr = new XMLHttpRequest();
+//var xhresponce = new XMLHttpResponce();
+xhr.onload = function () {
+    // 输出接收到的文字数据
+    document.getElementById("demo").innerHTML=xhr.responseText;
+}
+ 
+xhr.onerror = function () {
+    document.getElementById("demo").innerHTML="请求出错";
+}
+ 
+// 发送异步 GET 请求
+xhr.open("GET", "http://10.189.127.62:40012/getlcm2YieldRate/", true);
+xhr.send();
+</script>
+​
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: rgb(40, 143, 83);
+            min-height: 100vh;
+            perspective:1000px;
+        }
+        .container:hover{
+            animation-play-state: paused;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            transform-style: preserve-3d;
+            
+            width: 200px;
+            height: 200px;
+            /* transform: rotateY(30deg) rotateX(30deg); */
+            /* perspective-origin: 50% 50%; */
+            animation: animate 30s linear infinite alternate;
+        }
+        @keyframes animate{
+            0%{
+                transform: rotateY(0deg) rotateX(0deg);
+            }
+            50%{
+                transform: rotateY(180deg) rotateX(-180deg);
+            }
+            100%{
+                transform: rotateY(360deg) rotateX(180deg);
+            }
+        }
+        img{
+            position: absolute;
+            width: 300px;
+            height: 300px;
+            opacity: 0.95;
+        }
+        img:nth-child(1){
+            transform: rotateY(0deg) translateZ(150px);
+        }
+        img:nth-child(2){
+            transform: rotateY(90deg) translateZ(150px);
+        }
+        img:nth-child(3){
+            transform: rotateY(180deg) translateZ(150px);
+        }
+        img:nth-child(4){
+            transform: rotateY(270deg) translateZ(150px);
+        }
+        img:nth-child(5){
+            transform: rotateX(90deg) translateZ(150px);
+        }
+        img:nth-child(6){
+            transform: rotateX(90deg) translateZ(-150px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <img src="https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=977945772,801034889&fm=26&gp=0.jpg">
+        <img src="https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=3575272387,2671343721&fm=26&gp=0.jpg">
+        <img src="https://ss3.bdstatic.com/70cFv8Sh_Q1YnxGkpoWK1HF6hhy/it/u=1237429323,1585878936&fm=26&gp=0.jpg">
+        <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1150991353,2561671759&fm=26&gp=0.jpg">
+        <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3246447673,1486929131&fm=26&gp=0.jpg">
+        <img src="https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1044238517,2087401005&fm=26&gp=0.jpg">
+    </div>
+</body>
+</html>

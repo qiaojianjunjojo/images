@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="vue.min.js"></script>
+</head>
+<body>
+    <div class="app">
+        <p>counter的值为：{{counter}}</p>
+        <button v-on:click='counter++'>父组件的的按钮</button>
+        <qjj v-on:add='fatheradd'></qjj>
+        <qjj v-on:add='fatheradd'></qjj>
+        <blog-post v-for = "post in posts" v-bind:title = "post.title" v-bind:key="post.id"></blog-post>
+        <p>组件上的v-model</p>
+        <custom-input v-model ="counter" ></custom-input>
+    </div>
+    <script>
+        //在 Vue 里，一个组件本质上是一个拥有预定义选项的一个 Vue 实例。
+        Vue.component('qjj',{
+            template:'<div><button v-on:click="childadd(1)">-</button>{{ counter }}<button v-on:click="childadd(2)">+</button></div>',
+            data:function(){
+                return {
+                    counter:0
+                }
+            },
+            methods:{
+                childadd:function(num){
+                    if(num==1){
+                        this.counter-=1;
+                        this.$emit('add',1);
+                    }
+                    else{
+                        this.counter+=1;
+                        this.$emit('add',2);
+                    }
+                    
+                }
+            }
+
+            
+        })
+       //你会发现我们可以使用 v-bind 来动态传递 prop。这在你一开始不清楚要渲染的具体内容，比如从一个 API 获取博文列表的时候，是非常有用的。
+       //单个根元素 :每个组件必须只有一个根元素,你可以将模板的内容包裹在一个父元素内
+        Vue.component('blog-post',{
+            props:['title'],
+            template:'<h1>{{title}}</h1>'
+        });
+        Vue.component('custom-input',{
+            props:['value'],
+            template: `
+                        <input
+                        v-bind:value="value"
+                        v-on:input="$emit('input', $event.target.value)"
+                        >
+                     `
+        })
+        new Vue({
+            el:".app",
+            data:{
+                counter:0,
+                posts: [
+                        { id: 1, title: 'My journey with Vue' },
+                        { id: 2, title: 'Blogging with Vue' },
+                        { id: 3, title: 'Why Vue is so fun' }
+                        ]
+            },
+            methods:{
+                fatheradd:function(v){
+                    if(v==1)
+                    {
+                        this.counter-=1;
+                    }
+                    else{
+                        this.counter+=1;
+                    }
+                    
+                }
+            }
+        })
+    </script>
+</body>
+</html>

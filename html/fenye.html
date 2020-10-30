@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script  src="jquery.js"></script>
+    <style>
+        body{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        ul.page{
+            display: inline-block;
+        }
+        li{
+            display: inline;
+            
+        }
+        li a{
+            text-decoration: none;
+            padding: 0 15px;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        $(function(){
+            $.post("http://10.189.127.62:40017/getMDR_SCM_MTD_SITE_TREND/",
+                function(data,status){
+                alert("数据：" + data + "\n状态：" + status);
+                });
+        });
+    </script>
+</head>
+<body>
+    <ul class="page">
+        <li><a href="">1</a></li>
+        <li><a href="">2</a></li>
+        <li><a href="">3</a></li>
+        <li><a href="">4</a></li>
+        <li><a href="">5</a></li>
+        <li><a href="">6</a></li>
+    </ul>
+</body>
+</html>

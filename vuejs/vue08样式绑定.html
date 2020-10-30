@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Vue 测试实例 - 菜鸟教程(runoob.com)</title>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+</head>
+<body>
+<div id="app">  
+    <div v-bind:style="{color: 'red', fontSize: size + 'px'}">可以动态调节</div> 
+    <div v-bind:style="computedStyle">可以动态调节</div>
+    <div v-bind:style="objectStyle"> 可以动态调节</div> 
+    <div v-bind:style="methodStyle()"> 可以动态调节</div> 
+    {{size}}   
+    <button @click="++size">+</button> 
+    <button @click="--size">-</button>
+</div>
+<script>
+var vm = new Vue({
+    el: '#app',
+    data: {
+        size: 20,
+        objectStyle: {
+            color: 'green',
+            fontSize: this.size + 'px' //this.size为undefined
+        }
+    },
+    methods:{
+       methodStyle: function(){
+           return {color: 'green', fontSize: this.size + 'px'} 
+       } 
+    },
+    computed: {
+       computedStyle: function(){
+       return {color: 'red' , fontSize: this.size + 'px'} 
+       }
+    },
+    watch:{
+        size:function(){
+            this.objectStyle.fontSize = this.size + 'px';
+        }
+    }
+})
+</script>
+</body>
+</html>
