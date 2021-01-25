@@ -1,0 +1,20 @@
+swagger: "2.0"
+tags:
+- name: "Awesomeness Language API"
+  description: ""
+- name: other API
+  description: 
+
+paths:
+  /api:
+    post:
+      tags: 
+      - "Awesomeness Language API"
+      summary: "Finds Pets by status"
+      description: "Multiple status values can be provided with comma separated strings"
+      operationId: "findPetsByStatus"
+      produces:
+      - "application/xml"
+      - "application/json"
+   
+
