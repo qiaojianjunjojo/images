@@ -22,7 +22,7 @@
     <div class="app">
         {{info}}
         <table class="vuetesttable">
-            <tr v-for="row in info">
+            <tr v-for="(row,idx) in info" :key="idx">
                 <td>{{row.GRADE}}</td><td>{{row.red}}</td><td>{{row.green}}</td>
             </tr>
         </table>
@@ -42,10 +42,10 @@
             created(){
                 //定時刷新任務放在created 或者mounted都可以
                 this.getData();
-                this.timer =  setInterval(() => {
-                    this.getData();
-                    console.log("come on!")
-                }, 1000*3);
+                // this.timer =  setInterval(() => {
+                //     this.getData();
+                //     console.log("come on!")
+                // }, 1000*3);
             }
             ,
             mounted () {
