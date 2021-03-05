@@ -11,8 +11,8 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            width: 100%;
+            min-height: 100vh;
+          
         }
         .container{
             height: 200px;
@@ -37,10 +37,13 @@
             width: 30px;
             height: 30px;
             top: 5px;
+            left: 1px;
             position: absolute;
             border-radius: 50%;
             /* background-color: tomato; */
             border-right: 4px solid rgb(226, 220, 220);
+            /* border-bottom: 4px solid rgb(226, 220, 220); */
+            
         }
         .circle.red{
             background-color: tomato;
@@ -58,7 +61,7 @@
 </head>
 <body>
     <div class="container">
-        <div class="circle" color="red"></div>
+        <div class="circle red" color="red"></div>
         <div class="circle" color = "yellow"></div>
         <div class="circle" color = "green"></div>
     </div>

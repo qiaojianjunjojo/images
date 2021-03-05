@@ -125,7 +125,9 @@
             position: absolute;
             width: 15px;
             height: 15px;
-            
+            background-color: rgb(19, 5, 5);
+            border-radius: 50%;
+            z-index: 1000;
         }
         span{
             position: absolute;
@@ -241,7 +243,7 @@
             background: #000;
             /* transform: rotate(30deg);
             transform-origin: center bottom; */
-            animation: rotates 60s infinite linear;
+            /* animation: rotates 60s infinite linear; */
         }
     </style>
 
@@ -277,19 +279,24 @@
     </div>
     <script>
         setInterval(() => {
-            let day  = new Date();
+        let day  = new Date();
         let hh =day.getHours()*30;
         let mm = day.getMinutes()*deg;
         let ss = day.getSeconds()*deg;
         hr.style.transform = `rotateZ(${(hh) + (mm)/12}deg)`;
         mn.style.transform = `rotateZ(${mm}deg)`;
         sc.style.transform = `rotateZ(${ss}deg)`;
+        hr2.style.transform = `rotateZ(${(hh) + (mm)/12}deg)`;
+        mn2.style.transform = `rotateZ(${mm}deg)`;
+        sc2.style.transform = `rotateZ(${ss}deg)`;
         });
         const deg = 6;
         const hr = document.querySelector("#hr");
         const mn = document.querySelector("#mn");
         const sc = document.querySelector("#sc");
-        
+        const hr2 = document.querySelector(".hour2");
+        const mn2 = document.querySelector(".min2");
+        const sc2 = document.querySelector(".sec2");
     </script>
 </body>
 </html>

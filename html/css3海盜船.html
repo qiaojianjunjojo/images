@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+    }
+    body{
+        background-color: rgb(120, 129, 146);
+        min-height: 100vh;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+    .container{
+        width: 200px;
+        height: 200px;
+        background-color: transparent;
+        border-radius: 50%;
+        border: 20px solid transparent;
+        border-bottom: 20px solid rgb(46, 185, 11);
+        border-right: 20px solid rgb(46, 185, 11);
+        transform: rotate(45deg);
+        position: relative;
+        animation: aimatetion-01 4s  ease-in-out infinite;
+    }
+    @keyframes aimatetion-01{
+        0% {
+            transform: rotate(0deg);
+        }
+        50% {
+            transform: rotate(90deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+    .ball{
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        animation: aimatetion-02 4s  ease-in-out infinite;
+    }
+    @keyframes aimatetion-02{
+        0% {
+            transform: rotate(0deg);
+        }
+        50% {
+            transform: rotate(180deg);
+        }
+        100% {
+            transform: rotate(0deg);
+        }
+    }
+    .ball::before{
+        content: "";
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        right: 15px;
+        background-color: thistle;
+        bottom: 50%;
+        transform: translateY(-50%);
+    }
+</style>
+<body>
+    <div class="container">
+        <div class="loader">
+            <div class="ball"></div>
+        </div>
+        
+    </div>
+</body>
+</html>
