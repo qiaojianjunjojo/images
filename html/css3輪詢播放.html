@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Css3的動畫實現輪詢</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container{
+            width: 200px;
+            height: 200px;
+            margin: auto;
+            border: 1px solid red;
+            overflow: hidden;
+        }
+        .listitem:hover{
+            cursor: pointer;
+            animation-play-state: paused;
+        }
+        .listitem{
+            position: relative;
+            height: 200px;
+            width: 9999px;
+            animation: animate01 10s ease-in-out infinite;
+        }
+        @keyframes animate01{
+            0%,20%{
+                transform: translateX(0px);
+            }
+            21%,40%{
+                transform: translateX(-205px);
+            }
+            41%,60%{
+                transform: translateX(-410px);
+            }
+            61%,80%{
+                transform: translateX(-615px);
+            }
+            81%,100%{
+                transform: translateX(-820px);
+            }
+           
+        }
+        .item{
+            display: inline-block;
+            width: 200px;
+            height: 200px;
+            font-size: 200px;
+            text-align: center;
+            
+        }
+        .item:nth-child(1){
+            background-color: red;
+        }
+        .item:nth-child(2){
+            background-color: rgb(128, 155, 9);
+        }
+        .item:nth-child(3){
+            background-color: rgb(9, 155, 70);
+        }
+        .item:nth-child(4){
+            background-color: rgb(128, 6, 77);
+        }
+        .item:nth-child(5){
+            background-color: rgb(24, 111, 138);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <ul class="listitem">
+            <li class="item">1</li>
+            <li class="item">2</li>
+            <li class="item">3</li>
+            <li class="item">4</li>
+            <li class="item">5</li>
+        </ul>
+    </div>
+</body>
+</html>
