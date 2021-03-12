@@ -10,11 +10,13 @@
             justify-content: center;
             align-items: center;
             width: 350px;
-            height: 600px;
-            background-color: rgb(89, 136, 14);
+            height: 350px;
+            /* background-color: rgb(23, 68, 119); */
+            margin: auto;
+            position: relative;
         }
         .heart{
-            position: absolute;
+            position: relative;
             width: 150px;
             height: 150px;
             background-color: white;
@@ -44,6 +46,24 @@
             -webkit-transform: rotate(45deg);
             
         }
+        .heart2{
+            background-color: cyan;
+            width: 20px;
+            height: 80px;
+            position: absolute;
+            border-radius: 20px 20px 0 0;
+            transform: rotate(-45deg);
+            left: -5px;
+        }
+        .heart3{
+            background-color: cyan;
+            width: 20px;
+            height: 80px;
+            position: absolute;
+            border-radius: 20px 20px 0 0;
+            transform: rotate(45deg) ;
+            right: 5px;
+        }
         @keyframes bit{
             from{
                 -webkit-transform: scale(1);
@@ -59,6 +79,8 @@
 <body>
     <div class="container">
         <div class="heart"></div>
+        <div class="heart2"></div>
+        <div class="heart3"></div>
     </div>
 </body>
 </html>

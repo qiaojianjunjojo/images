@@ -6,32 +6,29 @@
     <title>Document</title>
     <script  src="jquery.js"></script>
     <style>
+        *{
+            margin: 0;padding: 0;
+        }
         body{
             display: flex;
             justify-content: center;
             align-items: center;
         }
         ul.page{
-            display: inline-block;
+            /* display: inline-block; */
+            border: 1px solid grey;
         }
         li{
-            display: inline;
+            display: inline-block;
+            margin: 15px;
             
         }
-        li a{
+        .page li a{
             text-decoration: none;
-            padding: 0 15px;
+            /* margin: 15px 15px; */
             font-size: 20px;
         }
     </style>
-    <script>
-        $(function(){
-            $.post("http://10.189.127.62:40017/getMDR_SCM_MTD_SITE_TREND/",
-                function(data,status){
-                alert("数据：" + data + "\n状态：" + status);
-                });
-        });
-    </script>
 </head>
 <body>
     <ul class="page">

@@ -4,13 +4,17 @@
 <meta charset="utf-8">
 <script src="https://cdn.staticfile.org/jquery/1.10.2/jquery.min.js">
 </script>
-<script>
-    $(function(){
-        $("tr:odd").css("background-color","yellow").click(function(){
-            alert("hellow!");
-        });
-    });
-</script>
+<style>
+    table{
+        border-collapse: collapse;
+    }
+    tr:nth-child(even){
+        background-color: grey;
+    }
+    tr:nth-child(2) td:nth-child(2){
+        background-color: indianred;
+    }
+</style>
 </head>
 <body>
 
