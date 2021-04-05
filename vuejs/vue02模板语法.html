@@ -8,20 +8,29 @@
     <script>
 
     </script>
+    <style>
+        #container{
+            background-color: crimson;
+        }
+    </style>
 </head>
 <body>
     <div id="container">
-        <div v-html = "message"></div>
-        <span v-html = "message"></span>
-        <button v-bind:disabled="isbtn"></button>
+        <table>
+            <tr>
+                <td>{{a}}</td>
+            </tr>
+        </table>
     </div>
     <script>
         var app = new Vue({
             el:'#container',
             data:{
                 message:'<h1>Vue模板语法</h1>',
-                isbtn:true
-            }
+                isbtn:true,
+                a:"1234567"
+            },
+            
         })
         //v-bind:href == :href
         //v-on:click == @click

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <script src="./jquery.js"></script>
+        <title>Document</title>
+        <script>
+            $(function () {
+                $.ajax({
+                    type: "get",
+                    url:
+                        // "http://10.189.127.62:46010/upload/IE-LCM1/test.json/",
+                        "http://10.189.127.62:46010/getupload/IE-LCM3/test.json/",
+                    dataType: "text",
+                    //url: "http://127.0.0.1:5000/getBeolYieldRate/",
+                    // url: "IE_LCM3_Warning.json",
+                    success: function (data) {
+                        var newdata = JSON.parse(data)
+                        console.log(newdata)
+
+                    },
+                    error: function () {
+                        console.log("failed!");
+                    },
+                });
+            });
+        </script>
+    </head>
+    <body></body>
+</html>

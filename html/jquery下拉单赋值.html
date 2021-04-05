@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./jquery.js"></script>
+    <title>Document</title>
+</head>
+<body>
+    <span class="lables">手机详情</span>
+    <select name="" class="copyMutual_phone_select">
+        <option value="">生成手机详情页</option>
+        <option value="">不生成手机详情页</option>
+        
+    </select>
+    <button class="phone_select_btn">点击赋值</button>
+</body>
+<script>
+    $('.phone_select_btn').click(function(){
+        $('.copyMutual_phone_select').html("");
+        const list = ['111','222','333']
+        for(let i=0;i<list.length;i++){
+            var option = $("<option></option>")
+            option.html(list[i])
+            $('.copyMutual_phone_select').append(option)
+        }
+        
+    })
+</script>
+</html>
